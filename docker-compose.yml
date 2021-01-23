@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  app:
+    container_name: express
+    build: .
+    volumes:
+      - ./app:/usr/src/app
+    ports:
+      - 3000:3000
+    links:
+      - db
+
+  db:
+    container_name: postgres
+    image: postgres:13
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5432:5432
