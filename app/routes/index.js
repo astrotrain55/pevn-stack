@@ -11,7 +11,7 @@ const client = new Client({
   database: 'postgres',
 });
 
-router.get('/api', async (req, res) => {
+router.get('/', async (req, res) => {
   const database = await client.query('SELECT * from users')
     .then(res => res.rows).catch(() => 'down');
 
